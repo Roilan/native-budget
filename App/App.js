@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navigator, StyleSheet } from 'react-native';
+import { Navigator, StyleSheet, View } from 'react-native';
 import Landing from './Components/Landing';
 
 const ROUTES = {
@@ -19,7 +19,9 @@ export default class App extends Component {
     const Component = ROUTES[route.name];
 
     return (
-      <Component route={route} navigator={navigator} />
+      <View style={styles.container}>
+        <Component route={route} navigator={navigator} />
+      </View>
     );
   }
 
