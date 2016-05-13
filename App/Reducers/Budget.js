@@ -3,29 +3,29 @@ const INITIAL_STATE = {
     'Monthly Bills': [
       {
         name: 'Rent',
-        amount: 0.00
+        amount: 10.00
       },
       {
         name: 'Internet',
-        amount: 0.00
+        amount: -10.00
       },
       {
         name: 'Electricity',
-        amount: 0.00
+        amount: 5.00
       },
       {
         name: 'Music',
-        amount: 0.00
+        amount: 50.00
       },
     ],
     'Everyday Expenses': [
       {
         name: 'Groceries',
-        amount: 0.00
+        amount: -200.00
       },
       {
         name: 'Fuel',
-        amount: 0.00
+        amount: -1230.00
       },
     ],
     'Other': [

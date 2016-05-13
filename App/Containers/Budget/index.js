@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ListView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Header from '../../Components/Common/Header';
-import { colors } from '../../Utils/styles';
+import { borderColors, colors } from '../../Utils/styles';
+import { colorOfNumber } from '../../Utils';
 
 class Budget extends Component {
   constructor() {
@@ -28,14 +29,18 @@ class Budget extends Component {
     return this.ds.cloneWithRowsAndSections(dataBlob);
   }
 
-  renderRow({ name }, sectionName, rowId) {
+  renderRow({ amount, name }, sectionName, rowId) {
     const { categories } = this.props.budget;
     const isLast = categories[sectionName].length - 1 === parseInt(rowId, 10);
     const sectionBorder = !isLast ? styles.sectionRowBorder : null;
+    const amountColor = colorOfNumber(amount);
 
     return (
       <View style={[styles.sectionRow, sectionBorder]}>
         <Text style={styles.sectionRowText}>{name}</Text>
+        <Text style={[styles.sectionRowText, styles.sectionRowAmount, { color: amountColor }]}>
+          ${amount.toFixed(2)}
+        </Text>
       </View>
     );
   }
@@ -83,19 +88,23 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   sectionHeaderText: {
-    color: 'white',
+    color: colors.white,
     fontSize: 15,
     fontWeight: '600',
   },
   sectionRow: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     padding: 10
   },
   sectionRowBorder: {
-    borderColor: 'rgba(153, 148, 148, 0.32)',
-    borderBottomWidth: 1
+    borderColor: borderColors.gray,
+    borderBottomWidth: 1.5
   },
   sectionRowText: {
     fontSize: 18
+  },
+  sectionRowAmount: {
   }
 });
 
