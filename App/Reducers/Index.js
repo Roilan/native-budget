@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import Budget from './Budget';
 
 const rootReducer = combineReducers({
-  state: () => ({})
+  budget: Budget
 });
 
 export default rootReducer;

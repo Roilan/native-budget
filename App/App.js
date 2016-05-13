@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Navigator, StyleSheet, View } from 'react-native';
 import Landing from './Components/Landing';
+import Budget from './Containers/Budget';
 
 const ROUTES = {
   landing: Landing,
+  budget: Budget,
 
-  initial: 'landing'
+  initial: 'budget'
 };
 
 export default class App extends Component {
