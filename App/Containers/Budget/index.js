@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Header from '../../Components/Common/Header';
+import Button from '../../Components/Common/Button';
 import { borderColors, colors } from '../../Utils/styles';
 import { colorOfNumber } from '../../Utils';
 
@@ -70,6 +71,10 @@ class Budget extends Component {
           renderSectionHeader={this.renderSectionHeader}
           style={styles.container}
         />
+
+        <Button onPress={() => console.log('press')}>
+          Add Transaction
+        </Button>
       </View>
     );
   }
