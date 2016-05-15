@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { ListView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
-import { selectCategory } from '../actions/budget';
+import { selectCategory } from '../actions/Budget';
 
-import Header from '../components/common/Header';
 import Button from '../components/common/Button';
 import List from '../components/common/List';
 import { borderColors, colors } from '../utils/styles';

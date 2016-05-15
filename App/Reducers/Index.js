@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import Budget from './budget';
+import Budget from './Budget';
 
 const rootReducer = combineReducers({
   budget: Budget

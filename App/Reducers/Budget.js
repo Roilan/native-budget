@@ -1,4 +1,4 @@
-import { SELECT_CATEGORY } from '../actions/budget';
+import { SELECT_CATEGORY } from '../actions/Budget';
 
 const INITIAL_STATE = {
   categories: {

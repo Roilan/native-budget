@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Navigator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Header from './components/common/Header';
 import Budget from './containers/Budget';
 import SingleCategory from './containers/SingleCategory';
 import { colors } from './utils/styles';
