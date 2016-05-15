@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import reducers from './Reducers/Index';
+import reducers from './reducers';
 const store = createStore(reducers);
 
 export default class ReduxApp extends Component {

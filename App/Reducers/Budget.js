@@ -1,3 +1,5 @@
+import { SELECT_CATEGORY } from '../actions/budget';
+
 const INITIAL_STATE = {
   categories: {
     'Monthly Bills': [
@@ -74,11 +76,16 @@ const INITIAL_STATE = {
       },
     ]
   },
-  transactionView: {}
+  selectedCategory: {}
 };
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case SELECT_CATEGORY:
+      return Object.assign({}, state, {
+        selectedCategory: action.payload
+      });
+
     default:
       return state;
   }

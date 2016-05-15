@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { TouchableHighlight, StyleSheet, Text, View } from 'react-native';
-import { colors } from '../../Utils/styles';
+import { colors } from '../../utils/styles';
 
 export default class Button extends Component {
   render() {

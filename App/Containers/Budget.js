@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { ListView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
-import Header from '../Components/Common/Header';
-import Button from '../Components/Common/Button';
-import List from '../Components/Common/List';
-import { borderColors, colors } from '../Utils/styles';
-import { colorOfNumber, createListData } from '../Utils';
+import { selectCategory } from '../actions/budget';
+
+import Header from '../components/common/Header';
+import Button from '../components/common/Button';
+import List from '../components/common/List';
+import { borderColors, colors } from '../utils/styles';
+import { colorOfNumber, createListData } from '../utils';
 
 class Budget extends Component {
   constructor() {
@@ -36,7 +38,9 @@ class Budget extends Component {
   }
 
   showTransactionView(category) {
-    console.log(category)
+    const { dispatch, navigator } = this.props;
+    dispatch(selectCategory(category));
+    navigator.push({ name: 'singleCategory' });
   }
 
   render() {
