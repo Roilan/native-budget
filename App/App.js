@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navigator, StyleSheet, View } from 'react-native';
+import Header from './Components/Common/Header';
 import Landing from './Components/Landing';
 import Budget from './Containers/Budget';
 
@@ -22,6 +23,7 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
+        <Header />
         <Component route={route} navigator={navigator} />
       </View>
     );

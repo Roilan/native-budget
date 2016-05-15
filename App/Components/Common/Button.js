@@ -3,10 +3,6 @@ import { TouchableHighlight, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../Utils/styles';
 
 export default class Button extends Component {
-  static propTypes = {
-    onPress: PropTypes.func.isRequired
-  };
-
   render() {
     const { children, onPress } = this.props;
 
@@ -35,3 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   }
 });
+
+Button.propTypes = {
+  onPress: PropTypes.func.isRequired
+}

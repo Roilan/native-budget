@@ -14,3 +14,13 @@ export function colorOfNumber(number) {
 
   return color;
 }
+
+export function createListData(dataObj) {
+  let dataBlob = {};
+
+  Object.keys(dataObj).forEach((sectionName) => {
+    dataBlob[sectionName] = dataObj[sectionName];
+  });
+
+  return dataBlob;
+}

@@ -3,38 +3,78 @@ const INITIAL_STATE = {
     'Monthly Bills': [
       {
         name: 'Rent',
-        amount: 10.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: 10.00
+          },
+          {
+            name: 'fool',
+            amount: 30.00
+          },
+        ]
       },
       {
         name: 'Internet',
-        amount: -10.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: 10.00
+          },
+        ]
       },
       {
         name: 'Electricity',
-        amount: 5.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: 10.00
+          },
+        ]
       },
       {
         name: 'Music',
-        amount: 50.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: 10.00
+          },
+        ]
       },
     ],
     'Everyday Expenses': [
       {
         name: 'Groceries',
-        amount: -200.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: -10.00
+          },
+        ]
       },
       {
         name: 'Fuel',
-        amount: -1230.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: -100010.00
+          },
+        ]
       },
     ],
     'Other': [
       {
         name: 'Insurance',
-        amount: 0.00
+        transactions: [
+          {
+            name: 'some fool',
+            amount: 0.00
+          },
+        ]
       },
     ]
-  }
+  },
+  transactionView: {}
 };
 
 export default function(state = INITIAL_STATE, action) {
