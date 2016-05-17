@@ -85,8 +85,6 @@ export default function(state = INITIAL_STATE, action) {
       let __selectedCategory = {};
       __selectedCategory[action.payload.name] = action.payload.transactions;
 
-      console.log(__selectedCategory)
-
       return Object.assign({}, state, {
         selectedCategory: __selectedCategory
       });

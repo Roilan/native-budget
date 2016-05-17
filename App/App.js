@@ -36,7 +36,15 @@ export default class App extends Component {
 
         return (
           <TouchableOpacity onPress={() => navigator.pop()}>
-            <Text style={[styles.navBarText, styles.navBarLeftButton]}>{'<'}</Text>
+            <View style={styles.navBarLeftButtonContainer}>
+              <Text style={[styles.navBarText, styles.navBarLeftButtonArrow]}>
+                {'<'}
+              </Text>
+
+              <Text style={[styles.navBarText, styles.navBarLeftButtonText]}>
+                Back
+              </Text>
+            </View>
           </TouchableOpacity>
         )
       },
@@ -48,7 +56,7 @@ export default class App extends Component {
       Title: (route, navigator, index, navState) => {
         return (
           <Text style={styles.navBarText}>
-            ezbudget
+            {route.title || 'ezbudget'}
           </Text>
         )
       }
@@ -89,13 +97,21 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginVertical: 5
   },
-  navBarLeftButton: {
+  navBarLeftButtonContainer: {
+    flexDirection: 'row',
+    paddingLeft: 5,
+    paddingRight: 20
+  },
+  navBarLeftButtonArrow: {
     //borderColor: 'red',
     //borderWidth: 2,
     fontSize: 25,
-    marginVertical: 2,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 5,
+    marginVertical: 3,
+  },
+  navBarLeftButtonText: {
+    fontSize: 20,
+    marginVertical: 7
   },
   navBarRightButton: {
     paddingRight: 10,

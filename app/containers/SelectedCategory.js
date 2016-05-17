@@ -12,16 +12,17 @@ class TransactionView extends Component {
     this.renderRow = this.renderRow.bind(this);
   }
 
-  renderRow({ name, amount}, sectionName, rowId) {
-    //const isLast = category.length - 1 === parseInt(rowId, 10);
-    //const sectionBorder = !isLast ? styles.sectionRowBorder : null;
-    //const amountColor = colorOfNumber(amount);
+  renderRow({ name, amount }, sectionName, rowId) {
+    const { category } = this.props;
+    const isLast = category[sectionName].length - 1 === parseInt(rowId, 10);
+    const sectionBorder = !isLast ? styles.sectionRowBorder : null;
+    const amountColor = colorOfNumber(amount);
 
     return (
       <View>
-        <View style={[styles.sectionRow, {}]}>
+        <View style={[styles.sectionRow, sectionBorder]}>
           <Text style={styles.sectionRowText}>{name}</Text>
-          <Text style={[styles.sectionRowText, { color: 'blue' }]}>
+          <Text style={[styles.sectionRowText, { color: amountColor }]}>
             ${amount.toFixed(2)}
           </Text>
         </View>

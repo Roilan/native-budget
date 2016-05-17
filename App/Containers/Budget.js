@@ -13,7 +13,7 @@ class Budget extends Component {
     super();
 
     this.renderRow = this.renderRow.bind(this);
-    this.showTransactionView = this.showTransactionView.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
   }
 
   renderRow({ transactions, name }, sectionName, rowId) {
@@ -25,7 +25,7 @@ class Budget extends Component {
     const amountColor = colorOfNumber(amount);
 
     return (
-      <TouchableHighlight onPress={() => this.showTransactionView(category[rowId])}>
+      <TouchableHighlight onPress={() => this.selectCategory(category[rowId])}>
         <View style={[styles.sectionRow, sectionBorder]}>
           <Text style={styles.sectionRowText}>{name}</Text>
           <Text style={[styles.sectionRowText, { color: amountColor }]}>
@@ -36,10 +36,10 @@ class Budget extends Component {
     );
   }
 
-  showTransactionView(category) {
+  selectCategory(category) {
     const { dispatch, navigator } = this.props;
     dispatch(selectCategory(category));
-    navigator.push({ name: 'selectedCategory' });
+    navigator.push({ title: category.name, name: 'selectedCategory' });
   }
 
   render() {
