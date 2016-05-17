@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Navigator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Budget from './containers/Budget';
-import SingleCategory from './containers/SingleCategory';
+import SelectedCategory from './containers/SelectedCategory';
 import { colors } from './utils/styles';
 
 const ROUTES = {
   budget: Budget,
-  singleCategory: SingleCategory,
+  selectedCategory: SelectedCategory,
 
   initial: 'budget'
 };
@@ -46,7 +46,6 @@ export default class App extends Component {
         }
       },
       Title: (route, navigator, index, navState) => {
-        console.log(navState)
         return (
           <Text style={styles.navBarText}>
             ezbudget

@@ -39,7 +39,7 @@ class Budget extends Component {
   showTransactionView(category) {
     const { dispatch, navigator } = this.props;
     dispatch(selectCategory(category));
-    navigator.push({ name: 'singleCategory' });
+    navigator.push({ name: 'selectedCategory' });
   }
 
   render() {

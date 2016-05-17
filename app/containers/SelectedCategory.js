@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import List from '../components/common/List';
+import { colorOfNumber } from '../utils';
 import { borderColors } from '../utils/styles';
 
 class TransactionView extends Component {
@@ -11,11 +12,21 @@ class TransactionView extends Component {
     this.renderRow = this.renderRow.bind(this);
   }
 
-  renderRow() {
+  renderRow({ name, amount}, sectionName, rowId) {
+    //const isLast = category.length - 1 === parseInt(rowId, 10);
+    //const sectionBorder = !isLast ? styles.sectionRowBorder : null;
+    //const amountColor = colorOfNumber(amount);
 
     return (
-      <Text>Something</Text>
-    )
+      <View>
+        <View style={[styles.sectionRow, {}]}>
+          <Text style={styles.sectionRowText}>{name}</Text>
+          <Text style={[styles.sectionRowText, { color: 'blue' }]}>
+            ${amount.toFixed(2)}
+          </Text>
+        </View>
+      </View>
+    );
   }
 
   render() {

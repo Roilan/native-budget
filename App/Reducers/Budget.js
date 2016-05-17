@@ -82,8 +82,13 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SELECT_CATEGORY:
+      let __selectedCategory = {};
+      __selectedCategory[action.payload.name] = action.payload.transactions;
+
+      console.log(__selectedCategory)
+
       return Object.assign({}, state, {
-        selectedCategory: action.payload
+        selectedCategory: __selectedCategory
       });
 
     default:
