@@ -14,7 +14,7 @@ class TransactionView extends Component {
 
   renderRow({ name, amount }, sectionName, rowId) {
     const { category } = this.props;
-    const isLast = category[sectionName].length - 1 === parseInt(rowId, 10);
+    const isLast = category.transactions.length - 1 === parseInt(rowId, 10);
     const sectionBorder = !isLast ? styles.sectionRowBorder : null;
     const amountColor = colorOfNumber(amount);
 
@@ -46,8 +46,6 @@ class TransactionView extends Component {
             </Text>
           </View>
 
-          <View></View>
-
           <View style={styles.categoryDetails}>
             <Text style={styles.categoryDetailsText}>
               {`Spent In ${date.monthName}`.toUpperCase()}
@@ -60,7 +58,7 @@ class TransactionView extends Component {
         </View>
 
         <List
-          dataSource={category}
+          dataSource={category.transactions}
           renderRow={this.renderRow}
         />
       </View>

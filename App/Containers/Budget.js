@@ -16,12 +16,12 @@ class Budget extends Component {
     this.selectCategory = this.selectCategory.bind(this);
   }
 
-  renderRow({ transactions, name }, sectionName, rowId) {
+  renderRow({ name, fundedAmount, transactions }, sectionName, rowId) {
     const { categories } = this.props.budget;
     const category = categories[sectionName];
     const isLast = category.length - 1 === parseInt(rowId, 10);
     const sectionBorder = !isLast ? styles.sectionRowBorder : null;
-    const amount = transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next);
+    const amount = fundedAmount - transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next);
     const amountColor = colorOfNumber(amount);
 
     return (
@@ -50,6 +50,7 @@ class Budget extends Component {
         <List
           dataSource={budget.categories}
           renderRow={this.renderRow}
+          renderHeader={true}
         />
 
         <Button onPress={() => console.log('press')}>

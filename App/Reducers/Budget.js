@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     'Monthly Bills': [
       {
         name: 'Rent',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
       },
       {
         name: 'Internet',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
@@ -27,19 +29,21 @@ const INITIAL_STATE = {
       },
       {
         name: 'Electricity',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
-            amount: 10.00
+            amount: 120.00
           },
         ]
       },
       {
         name: 'Music',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
-            amount: 10.00
+            amount: 16.00
           },
         ]
       },
@@ -47,19 +51,21 @@ const INITIAL_STATE = {
     'Everyday Expenses': [
       {
         name: 'Groceries',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
-            amount: -10.00
+            amount: 30.00
           },
         ]
       },
       {
         name: 'Fuel',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
-            amount: -100010.00
+            amount: 50.00
           },
         ]
       },
@@ -67,6 +73,7 @@ const INITIAL_STATE = {
     'Other': [
       {
         name: 'Insurance',
+        fundedAmount: 100.00,
         transactions: [
           {
             name: 'some fool',
@@ -82,11 +89,10 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SELECT_CATEGORY:
-      let __selectedCategory = {};
-      __selectedCategory[action.payload.name] = action.payload.transactions;
-
       return Object.assign({}, state, {
-        selectedCategory: __selectedCategory
+        selectedCategory: {
+          ...action.payload
+        }
       });
 
     default:

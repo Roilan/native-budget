@@ -7,9 +7,13 @@ export default class List extends Component {
   constructor() {
     super();
 
-    this.ds = new ListView.DataSource({
+    this.dsWithHeaders = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+    });
+
+    this.ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
     });
 
     this.setDataSource = this.setDataSource.bind(this);
@@ -29,18 +33,37 @@ export default class List extends Component {
   }
 
   setDataSource(data) {
-    const listData = createListData(data);
-    return this.ds.cloneWithRowsAndSections(listData);
+    const { renderHeader } = this.props;
+    let cloneWith;
+
+    if (renderHeader) {
+      const listData = createListData(data);
+      cloneWith = this.dsWithHeaders.cloneWithRowsAndSections(listData);
+    } else {
+      cloneWith = this.ds.cloneWithRows(data);
+    }
+
+    return cloneWith;
   }
 
   render() {
-    const { dataSource, renderRow } = this.props;
+    const { dataSource, renderRow, renderHeader } = this.props;
+
+    if (renderHeader) {
+      return (
+        <ListView
+          dataSource={this.setDataSource(dataSource)}
+          renderRow={renderRow}
+          renderSectionHeader={this.renderSectionHeader}
+          style={styles.container}
+        />
+      );
+    }
 
     return (
       <ListView
         dataSource={this.setDataSource(dataSource)}
         renderRow={renderRow}
-        renderSectionHeader={this.renderSectionHeader}
         style={styles.container}
       />
     );
@@ -67,5 +90,13 @@ const styles = StyleSheet.create({
 });
 
 List.propTypes = {
-  dataSource: PropTypes.object.isRequired
-}
+  dataSource: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  renderRow: PropTypes.func.isRequired
+};
+
+List.defaultProps = {
+  renderHeader: false
+};
