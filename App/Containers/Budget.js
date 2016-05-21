@@ -6,7 +6,7 @@ import { selectCategory } from '../actions/Budget';
 import Button from '../components/common/Button';
 import List from '../components/common/List';
 import { borderColors, colors } from '../utils/styles';
-import { colorOfNumber, createListData } from '../utils';
+import { colorOfNumber, createListData, toDollarAmount } from '../utils';
 
 class Budget extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class Budget extends Component {
     const category = categories[sectionName];
     const isLast = category.length - 1 === parseInt(rowId, 10);
     const sectionBorder = !isLast ? styles.sectionRowBorder : null;
-    const amount = fundedAmount - transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next);
+    const amount = fundedAmount + transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next);
     const amountColor = colorOfNumber(amount);
 
     return (
@@ -29,7 +29,7 @@ class Budget extends Component {
         <View style={[styles.sectionRow, sectionBorder]}>
           <Text style={styles.sectionRowText}>{name}</Text>
           <Text style={[styles.sectionRowText, { color: amountColor }]}>
-            ${amount.toFixed(2)}
+            {toDollarAmount(amount)}
           </Text>
         </View>
       </TouchableHighlight>

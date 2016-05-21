@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import List from '../components/common/List';
-import { colorOfNumber, date } from '../utils';
+import { colorOfNumber, date, toDollarAmount } from '../utils';
 import { borderColors, colors } from '../utils/styles';
 
 class TransactionView extends Component {
@@ -23,7 +23,7 @@ class TransactionView extends Component {
         <View style={[styles.sectionRow, sectionBorder]}>
           <Text style={styles.sectionRowText}>{name}</Text>
           <Text style={[styles.sectionRowText, { color: amountColor }]}>
-            ${amount.toFixed(2)}
+            {toDollarAmount(amount)}
           </Text>
         </View>
       </View>
@@ -32,27 +32,28 @@ class TransactionView extends Component {
 
   render() {
     const { category } = this.props;
+    const transactionTotal = category.transactions.length > 0 ? category.transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next) : 0.00;
 
     return (
       <View style={styles.container}>
         <View style={styles.categoryDetailsRow}>
           <View style={styles.categoryDetails}>
-            <Text style={styles.categoryDetailsText}>
+            <Text style={styles.categoryText}>
               {`Funded in ${date.monthName}`.toUpperCase()}
             </Text>
 
-            <Text style={[styles.categoryDetailsText, styles.categoryDetailsAmount]}>
-              $100.00
+            <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(category.fundedAmount) }]}>
+              {toDollarAmount(category.fundedAmount)}
             </Text>
           </View>
 
           <View style={styles.categoryDetails}>
-            <Text style={styles.categoryDetailsText}>
+            <Text style={styles.categoryText}>
               {`Spent In ${date.monthName}`.toUpperCase()}
             </Text>
 
-            <Text style={[styles.categoryDetailsText, styles.categoryDetailsAmount]}>
-              $0.00
+            <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(transactionTotal) }]}>
+              {toDollarAmount(transactionTotal)}
             </Text>
           </View>
         </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10
   },
-  categoryDetailsText: {
+  categoryText: {
     color: colors.white,
     fontSize: 14,
     fontWeight: '400',

@@ -34,7 +34,6 @@ export const date = (() => {
   };
   const month = today.getMonth() + 1;
 
-
   return {
     day: today.getDate(),
     month,
@@ -42,3 +41,7 @@ export const date = (() => {
     year: today.getFullYear()
   }
 })();
+
+export const toDollarAmount = (str) => {
+  return `$${str.toFixed(2)}`;
+}
