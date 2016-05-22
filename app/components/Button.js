@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { TouchableHighlight, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../utils/styles';
 
