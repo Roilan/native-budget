@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import List from '../components/common/List';
+import List from '../components/List';
 import { colorOfNumber, date, toDollarAmount } from '../utils';
 import { borderColors, colors } from '../utils/styles';
 

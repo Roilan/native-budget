@@ -3,8 +3,8 @@ import { ListView, StyleSheet, Text, TouchableHighlight, View } from 'react-nati
 import { connect } from 'react-redux';
 import { selectCategory } from '../actions/Budget';
 
-import Button from '../components/common/Button';
-import List from '../components/common/List';
+import Button from '../components/Button';
+import List from '../components/List';
 import { borderColors, colors } from '../utils/styles';
 import { colorOfNumber, createListData, toDollarAmount } from '../utils';
 

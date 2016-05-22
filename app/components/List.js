@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { ListView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { colors } from '../../utils/styles';
-import { createListData } from '../../utils';
+import { colors } from '../utils/styles';
+import { createListData } from '../utils';
 
 export default class List extends Component {
   constructor() {
