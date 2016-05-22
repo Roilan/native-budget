@@ -10,11 +10,12 @@ class TransactionView extends Component {
     super();
 
     this.renderRow = this.renderRow.bind(this);
+    this.getTransactions = this.getTransactions.bind(this);
   }
 
   renderRow({ name, amount }, sectionName, rowId) {
-    const { category } = this.props;
-    const isLast = category.transactions.length - 1 === parseInt(rowId, 10);
+    const { transactionObj } = this.props.category;
+    const isLast = transactionObj[sectionName].length - 1 === parseInt(rowId, 10);
     const sectionBorder = !isLast ? styles.sectionRowBorder : null;
     const amountColor = colorOfNumber(amount);
 
@@ -30,9 +31,27 @@ class TransactionView extends Component {
     );
   }
 
+  getTransactions(transactionObj) {
+    const categoryArr = Object.keys(transactionObj);
+    let transactions = [];
+
+    if (categoryArr.length === 0) {
+      return transactions;
+    }
+
+    categoryArr.forEach(key => {
+      transactionObj[key].forEach(transaction => {
+        transactions.push(transaction);
+      });
+    });
+
+    return transactions;
+  }
+
   render() {
-    const { category } = this.props;
-    const transactionTotal = category.transactions.length > 0 ? category.transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next) : 0.00;
+    const { fundedAmount, transactionObj } = this.props.category;
+    const transactions = this.getTransactions(transactionObj);
+    const transactionTotal = transactions.length > 0 ? transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next) : 0.00;
 
     return (
       <View style={styles.container}>
@@ -42,8 +61,8 @@ class TransactionView extends Component {
               {`Funded in ${date.monthName}`.toUpperCase()}
             </Text>
 
-            <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(category.fundedAmount) }]}>
-              {toDollarAmount(category.fundedAmount)}
+            <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(fundedAmount) }]}>
+              {toDollarAmount(fundedAmount)}
             </Text>
           </View>
 
@@ -59,7 +78,8 @@ class TransactionView extends Component {
         </View>
 
         <List
-          dataSource={category.transactions}
+          dataSource={transactionObj}
+          renderHeader={true}
           renderRow={this.renderRow}
         />
       </View>

@@ -39,7 +39,7 @@ class Budget extends Component {
   selectCategory(category) {
     const { dispatch, navigator } = this.props;
     dispatch(selectCategory(category));
-    navigator.push({ title: category.name, name: 'selectedCategory' });
+    navigator.push({ title: category.name, routeName: 'selectedCategory' });
   }
 
   render() {

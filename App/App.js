@@ -19,7 +19,7 @@ export default class App extends Component {
   }
 
   renderRoute(route, navigator) {
-    const Component = ROUTES[route.name];
+    const Component = ROUTES[route.routeName];
 
     return (
       <View style={styles.routeContainer}>
@@ -72,7 +72,7 @@ export default class App extends Component {
     return (
       <Navigator
         configureScene={() => Navigator.SceneConfigs.FloatFromRight}
-        initialRoute={{name: ROUTES.initial}}
+        initialRoute={{routeName: ROUTES.initial}}
         navigationBar={Navbar}
         renderScene={this.renderRoute}
         style={styles.container}

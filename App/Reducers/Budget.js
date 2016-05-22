@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { SELECT_CATEGORY } from '../actions/Budget';
 
 const INITIAL_STATE = {
@@ -17,6 +18,11 @@ const INITIAL_STATE = {
             amount: -30.00,
             date: '2016-05-21T23:39:57.908Z'
           },
+          {
+            name: 'fool2',
+            amount: -10.00,
+            date: '2016-04-21T23:39:57.908Z'
+          }
         ]
       },
       {
@@ -93,13 +99,33 @@ const INITIAL_STATE = {
   },
   selectedCategory: {}
 };
+//moment(category.transactions[0].date).format('ll')
+
+function createSelectedCategoryObj(transactions) {
+  let transactionObj = {};
+
+  transactions.forEach(transaction => {
+    const { name, date, amount } = transaction;
+    const dateFormatted = moment(date).format('ll');
+
+    if (!transactionObj[dateFormatted]) {
+      transactionObj[dateFormatted] = [];
+    }
+
+    transactionObj[dateFormatted].push({ name, amount });
+  });
+
+  return transactionObj;
+}
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SELECT_CATEGORY:
       return Object.assign({}, state, {
         selectedCategory: {
-          ...action.payload
+          name: action.payload.name,
+          fundedAmount: action.payload.fundedAmount,
+          transactionObj: createSelectedCategoryObj(action.payload.transactions)
         }
       });
 
