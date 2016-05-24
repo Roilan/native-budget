@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { colors } from './styles';
 
 export function colorOfNumber(number) {
@@ -26,22 +27,38 @@ export function createListData(dataObj) {
 }
 
 export const date = (() => {
-  const today = new Date();
-  const monthNames = {
-    1: 'January',  2: 'Feburary',  3: 'March',  4: 'April',
-    5: 'May',  6: 'June',  7: 'July',  8: 'August',
-    9: 'September',  10: 'October',  11: 'November',  12: 'December'
-  };
-  const month = today.getMonth() + 1;
+  const today = moment();
+  const month = moment().month() + 1;
 
   return {
-    day: today.getDate(),
+    day: today.day(),
     month,
-    monthName: monthNames[month],
-    year: today.getFullYear()
+    monthNameShort: moment.monthsShort(month - 1),
+    year: today.year()
   }
 })();
 
 export const toDollarAmount = (str) => {
   return `$${str.toFixed(2)}`;
+}
+
+export const fundedInCurrentMonth = (transactions) => {
+  return transactions
+          .filter(transaction => moment(transaction.date).month() + 1 === date.month)
+          .map(transaction => transaction.amount)
+          .reduce((prev, next) => prev + next);
+}
+
+export const getCurrentMonthTransactions = (transactionObj) => {
+  let transactions = [];
+
+  Object.keys(transactionObj).forEach(key => {
+    transactionObj[key]
+      .filter(transaction => moment(transaction.date).month() + 1 === date.month)
+      .forEach(transaction => {
+        transactions.push(transaction);
+      });
+  });
+
+  return transactions;
 }

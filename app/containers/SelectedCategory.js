@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import List from '../components/List';
 import Remaining from '../components/Remaining';
 import Funding from '../components/Funding';
-import { colorOfNumber, toDollarAmount } from '../utils';
+import { colorOfNumber, date, getCurrentMonthTransactions, toDollarAmount } from '../utils';
 import { borderColors, colors } from '../utils/styles';
 
 class TransactionView extends Component {
@@ -12,7 +12,6 @@ class TransactionView extends Component {
     super();
 
     this.renderRow = this.renderRow.bind(this);
-    this.getTransactions = this.getTransactions.bind(this);
   }
 
   renderRow({ name, amount }, sectionName, rowId) {
@@ -33,35 +32,16 @@ class TransactionView extends Component {
     );
   }
 
-  getTransactions(transactionObj) {
-    const categoryArr = Object.keys(transactionObj);
-    let transactions = [];
-
-    if (categoryArr.length === 0) {
-      return transactions;
-    }
-
-    categoryArr.forEach(key => {
-      transactionObj[key].forEach(transaction => {
-        transactions.push(transaction);
-      });
-    });
-
-    return transactions;
-  }
-
   render() {
     const { fundedAmount, transactionObj } = this.props.category;
-    const transactions = this.getTransactions(transactionObj);
+    const transactions = getCurrentMonthTransactions(transactionObj);
     const transactionTotal = transactions.length > 0 ? transactions.map(transaction => transaction.amount).reduce((prev, next) => prev + next) : 0.00;
     const balance = fundedAmount + transactionTotal;
 
     return (
       <View style={styles.container}>
         <Funding fundedAmount={fundedAmount} total={transactionTotal} />
-
         <Remaining amount={balance} />
-
         <List
           dataSource={transactionObj}
           renderHeader={true}

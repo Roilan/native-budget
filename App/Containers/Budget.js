@@ -52,7 +52,6 @@ class Budget extends Component {
           renderRow={this.renderRow}
           renderHeader={true}
         />
-
         <Button onPress={() => console.log('press')}>
           Add Transaction
         </Button>

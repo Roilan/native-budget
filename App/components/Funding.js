@@ -7,7 +7,7 @@ export default ({ fundedAmount, total }) => (
   <View style={styles.categoryDetailsRow}>
     <View style={styles.categoryDetails}>
       <Text style={styles.categoryText}>
-        {`Funded in ${date.monthName}`.toUpperCase()}
+        {`Funded in ${date.monthNameShort}`.toUpperCase()}
       </Text>
 
       <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(fundedAmount) }]}>
@@ -17,7 +17,7 @@ export default ({ fundedAmount, total }) => (
 
     <View style={styles.categoryDetails}>
       <Text style={styles.categoryText}>
-        {`Spent In ${date.monthName}`.toUpperCase()}
+        {`Spent In ${date.monthNameShort}`.toUpperCase()}
       </Text>
 
       <Text style={[styles.categoryText, styles.categoryDetailsAmount, { color: colorOfNumber(total) }]}>

@@ -9,6 +9,11 @@ const INITIAL_STATE = {
         fundedAmount: 100.00,
         transactions: [
           {
+            name: 'fool2',
+            amount: -10.00,
+            date: '2016-04-21T23:39:57.908Z'
+          },
+          {
             name: 'some fool',
             amount: -10.00,
             date: '2016-05-21T23:39:57.908Z'
@@ -17,11 +22,6 @@ const INITIAL_STATE = {
             name: 'fool',
             amount: -30.00,
             date: '2016-05-21T23:39:57.908Z'
-          },
-          {
-            name: 'fool2',
-            amount: -10.00,
-            date: '2016-04-21T23:39:57.908Z'
           }
         ]
       },
@@ -99,21 +99,22 @@ const INITIAL_STATE = {
   },
   selectedCategory: {}
 };
-//moment(category.transactions[0].date).format('ll')
 
 function createSelectedCategoryObj(transactions) {
   let transactionObj = {};
 
-  transactions.forEach(transaction => {
-    const { name, date, amount } = transaction;
-    const dateFormatted = moment(date).format('ll');
+  transactions
+    .sort((a, b) => moment(b.date) - moment(a.date))
+    .forEach(transaction => {
+      const { name, date, amount } = transaction;
+      const dateFormatted = moment(date).format('ll');
 
-    if (!transactionObj[dateFormatted]) {
-      transactionObj[dateFormatted] = [];
-    }
+      if (!transactionObj[dateFormatted]) {
+        transactionObj[dateFormatted] = [];
+      }
 
-    transactionObj[dateFormatted].push({ name, amount });
-  });
+      transactionObj[dateFormatted].push({ name, amount, date });
+    });
 
   return transactionObj;
 }
